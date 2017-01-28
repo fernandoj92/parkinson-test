@@ -1,0 +1,62 @@
+---
+title: "Some interesting things about vectors in R"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(out.width='350px', dpi=200)
+```
+
+##  Naming vectors
+
+Vectors can have assigned names with the ```names()``` function
+
+```{r names }
+numbers = c(1:5)
+names(numbers) = c("first", "second", "third", "fourth", "fifth")
+numbers
+```
+
+## Plotting vectors
+
+The ```barplot()``` function draws a bar chart with a vector's values.
+
+```{r barplot, fig.align='center'}
+barplot(numbers)
+```
+
+## Arithmetic operations on vectors
+
+When we use arithmetic operations on vectors, they are applied to each element of it.
+
+```{r arithmetic }
+numbers + 10
+numbers / 2
+numbers * 3
+```
+
+Other math functions like "sin", "cos" or "sqrt" can be applied to each element of the vector the same way theay are used with numbers:
+```{r functions_vector }
+sqrt(numbers)
+```
+
+## Adding vectors
+Vectors can be added or subtracted using the "+", "-" operators when they have the same dimension.
+
+```{r add_vectors }
+a = 1:3
+b = 5:7
+a + b
+```
+
+## Comparing vectors
+
+Vectors can also be compared with the "==" operator. This will compare each of their elements and return a vector with its boolean values.
+
+```{r compare_vectors }
+a == 2:4
+a == 1
+a < b
+```
+
