@@ -1,0 +1,59 @@
+---
+title: "Matrices in R"
+output:
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Initialize a matrix
+We can make a 3x4 matrix of zeroes with the following code:
+
+```{r zeroes_matrix}
+matrix(0, 3, 4)
+```
+
+We can initialize a matrix using a vector of values. Note: if the size of the vector is greater or smaller than the number of cells in the matrix, a warning will be received, but the matrix will be anyway initialized:
+
+```{r init_matrix}
+m_init = 1:15
+m = matrix(m_init, 3, 4)
+print(m)
+```
+
+## Change the dimension of a matrix / vector
+We can transform a vector into a matrix with the ```dim()``` function. We simply assign a vector that will act as its new dimension
+
+```{r dim_matrix}
+dim(m) = c(4,3)
+print(m)
+```
+
+## Accessing matrix values
+
+Similar to vectors, they can be easily accessed with th "[]" operator
+
+```{r access_matrix}
+print(m[1,3])
+```
+
+Note: take care when using indexes out of rnge, R doesn't provide a warning an works a bit unconventional (both the follwoing examples should fail).
+
+```{r outofbounds_matrix}
+print(m[-1,3])
+print(m[0,2])
+```
+
+We can get an entire row of the matrix by omitting the column index (but keeping the comma). 
+
+```{r access_row_matrix}
+print(m[1,])
+```
+
+We can also retrieve multiple rows or columns by providing a vector or sequence with their indices.
+
+```{r access_multiple_column_matrix}
+print(m[,2:3])
+```

@@ -1,0 +1,19 @@
+tremor			=> 1.1 + 1.2 + 2.1 + 2.2 
+bradykinesia		=> 3
+rigidity		=> 4 
+walking_and_stability 	=> 5 + 6 + 7 + 9 + (15) + (16)
+dyskinesias		=> 18 + 19
+motor_fluctuations	=> 20 + 21
+
+# Boca y cara
+speech			=> 8 + 11 
+swallowing		=> 10 
+feeding			=> 12 
+
+# Postura
+dressing 		=> 13 
+changing position	=> 15 
+walking			=> 16 
+
+# Manos y brazos
+handwriting		=> 17 (tremor + rigidity + bradykinesia)

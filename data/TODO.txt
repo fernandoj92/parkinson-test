@@ -1,0 +1,7 @@
+Distinguimos 2 grupos principales de Datos
+
+- Datos sin tener en cuenta el tratamiento del paciente - 897 instancias
+- Datos con tratamiento del paciente - 781 instancias
+
+En ambos set de datos, se estan utilizando todas las features motoras. Esto no ocurre asi en el paper de Jesse 
+donde las features del grupo "daily living" no se tienen en cuenta.
