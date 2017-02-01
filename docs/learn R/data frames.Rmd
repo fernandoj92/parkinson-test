@@ -1,0 +1,49 @@
+---
+title: "Data frames in R"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Data frame subsets
+
+There is a ```subset()``` function that allow us to retrieve a specific set of columns or drop a specific set of them. To illustrate it we will first create a simple Data frame.
+
+```{r create_data}
+df = data.frame(a =5:9, b = 6:10, c= 7:11)
+print(df)
+```
+
+Then we can take for example columns "b" and "c" with the following code:
+
+```{r select_bc}
+df1 = subset(df, select = c(b,c))
+print(df1)
+```
+
+Another posible approach to obtain a data frame composed only of the columns "b" and "c" would to drop the column "a":
+
+```{r remove_a}
+df2 = subset(df, select = -c(a))
+print(df2)
+```
+
+## Summary statistics
+
+There are many packages that allow us to obtain the summary statistics of a data frame. An example would be the ```fBasics``` package, which has the ```basicStats(dataFrame)``` function.
+
+Another possibility is to use the do.call functoin in combination with a set of specific functions such as ```mean()```, ```median()```, ```sd()```..., to obtain a specific set of summary statistics:
+
+```{r summary_statistics}
+ss = do.call(data.frame, list(
+    mean = sapply(df, mean),
+    sd = sapply(df, sd),
+    median = sapply(df, median),
+    min = sapply(df, min),
+    max = sapply(df, max)
+))
+print(ss)
+```
+
