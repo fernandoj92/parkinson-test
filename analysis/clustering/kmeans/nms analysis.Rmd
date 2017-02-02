@@ -46,7 +46,7 @@ d897_nms30_silhouette = fviz_nbclust(x897_nms_30, FUN=kmeans, method = "silhouet
 
 ```{r gap_statistic}
 d897_nms30_gap = clusGap(x897_nms_30, FUN=kmeans, B=500, K.max = 10, nstart = 20, iter.max=30)
-print(d897_nms30_gap, "Tibbs2001SEmax")
+print(d897_nms30_gap, "Tibs2001SEmax")
 ```
 
 ### Execute the algorithm for k = 2,3,4
@@ -100,6 +100,11 @@ No se si seria especificamente lo mismo, creo que si. con Kmeans_models[[i]]$cen
 Una idea interesante seria utilizar un heatmap con cada escala y despues combinarlos. Otra opcion es lo que hace Jesse y normalizar.
 
 TODO: Si añadimos los valores a las casillas del heatmap puede entenderse más facilmente en combinación con los colores
+
+Basic heatmap:
+
+heat_map_data = x897_nms3_kmeans3$centers
+kmeans3_heatmap = heatmap(heat_map_data, Rowv=NA, Colv=NA, col = heat.colors(256), scale="column", margins=c(5,10))
 
 # Domain Analysis
 

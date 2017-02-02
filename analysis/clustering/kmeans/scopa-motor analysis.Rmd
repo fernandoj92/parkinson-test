@@ -1,0 +1,51 @@
+---
+title: "scopa-motor analysis"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# SCOPA-MOTOR symptoms analysis
+
+El dataset en cuestión cuenta con 897 instancias y 25 features que representan 21 features reales, de las cuales algunas están duplicadas ya que se refieren a conceptos dobles (dolor izq y derecho por ejemplo).
+
+```{r load_data}
+# Loading the data file with 897 complete instances and 137 variables
+d897 = read.csv("analysis/clustering/data/897_motor_nms_cluster.csv")
+
+# Filtering the data frame
+d897_motor25 = d897[8:32]
+```
+
+## Libraries
+
+library(cluster)
+
+## KMeans clustering
+
+### Determine the appropiate number of clusters
+
+Vamos a probar con el gap statistics que parece que es el que mejor va (por pruebas y demas)
+
+#### Gap Statistic
+
+```{r gap_statistic}
+d897_motor25_gap = clusGap(x897_motor25, FUN=kmeans, B=500, K.max = 10, nstart = 20, iter.max=30)
+print(d897_motor25_gap, "Tibs2001SEmax")
+```
+
+### Execute the algorithm for k = 3,4,5
+
+The KMeans algorithm is executed 3 times, storing the resulting models in a new list
+
+```{r kmeans_models}
+# first we create a list of NULL values with size = 3
+Kmeans_models = vector("list", 3)
+
+# Execute the kmeans algorithm 3 times (k = 2,3,4)
+for(i in 1:length(Kmeans_models)){
+  Kmeans_models[[i]] = kmeans(x = d897_nms30, centers = i+1, iter.max = 30, nstart = 20)
+}
+```
