@@ -1,0 +1,106 @@
+---
+title: "Non Motor Symptoms Analysis with Hard Clustering"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(out.width='350px', dpi=200)
+```
+
+# Symptom Analysis
+
+El dataset que vamos a analizar cuenta con 897 instancias completas. El dataset cuenta con 2 tipos de datos, las features referentes a los 30 síntomas evaluados en el cuestionario NMS y una serie de datos demográficos.
+
+```{r load_data}
+# Loading the data file with 897 complete instances and 137 variables
+d897 = read.csv("analysis/clustering/data/897_motor_nms_cluster.csv")
+
+# Filtering the data frame
+d897_nms30 = d897[38:67]
+```
+
+El cluster analysis solo se va a realizar sobre las columnas que se refieren a los síntomas y una vez hayan sido agrupadas las instancias se realizará un analisis de los clusters utilizando los correspondientes datos demográficos
+
+Para hacer clustering se pueden utilizar varios algoritmos, en este caso vamos a seguir el ejemplo de Jesse y utilizar el KMeans. 
+
+## KMeans clustering
+
+### Determine the appropiate number of clusters
+
+To determine the appropiate number of K to be used in the KMeans algorithm, some authors have proposed various techniques. Some of the most famous are the "elbow method" and the "Gap statistic method".
+
+#### Elbow method
+
+```{r elbow_method}
+d897_nms30_elbow = fviz_nbclust(x897_nms_30, FUN=kmeans, method = "wss", nboot=500, k.max = 10, nstart = 20, iter.max=30)
+```
+
+#### Silhouette method
+
+```{r elbow_method}
+d897_nms30_silhouette = fviz_nbclust(x897_nms_30, FUN=kmeans, method = "silhouette", nboot=500, k.max = 10, nstart = 20, iter.max=30)
+```
+
+#### Gap Statistic
+
+```{r gap_statistic}
+d897_nms30_gap = clusGap(x897_nms_30, FUN=kmeans, B=500, K.max = 10, nstart = 20, iter.max=30)
+print(d897_nms30_gap, "Tibbs2001SEmax")
+```
+
+### Execute the algorithm for k = 2,3,4
+
+The KMeans algorithm is executed 3 times, storing the resulting models in a new list
+
+```{r kmeans_models}
+# first we create a list of NULL values with size = 3
+Kmeans_models = vector("list", 3)
+
+# Execute the kmeans algorithm 3 times (k = 2,3,4)
+for(i in 1:length(Kmeans_models)){
+  Kmeans_models[[i]] = kmeans(x = d897_nms30, centers = i+1, iter.max = 30, nstart = 20)
+}
+```
+
+### Complete data with cluster assignments
+
+El dataset contiene muchas variables que no necesitamos, para el análisis de los clusters nos vamos a quedar unicamente con los 30 síntomas NMS, las siguientes variables demográficas ("age", "sex", "pd_onset", "durat_pd") y las siguientesvariables motoras generales ("cisitot" y "hy").
+
+```{r data_with_clusters}
+
+# First we select the columns that interest us for the analysis
+filtered_d897 = d897[c(38:67, 3:7, 82, 33)]
+
+#Then we create a new list where each of its items is a completed data frame with clusters
+filtered_d897_withClusters = vector("list", 3)
+
+for(i in 1:length(filtered_d897_withClusters)){
+  filtered_d897$cluster = Kmeans_models[[i]]$cluster
+  filtered_d897_withClusters[[i]] = filtered_d897$cluster
+}
+```
+
+### Create heat maps for k=2,3,4
+
+Para poder generar heat maps vamos a obtener las medias de cada feature y compararlas con el centro de su cluster asociado. Dado que las variables a mostrar en el heatmap no comparten la misma escala, definiremos una escala propia la cual estara normalizada con respecto a la media de cada feature segun los datos.
+
+Por lo tant lo que realmente necesitamos son los siguientes datos:
+
+1 - Las medias de cada feature con respecto a cada cluster
+2 - Los centros de cada cluster
+3 - Las medias generales de cada feature
+
+Con estos datos tenemos 2 formas de hacer el heatmap: 
+1 - Comparar las medias de cada cluster con respecto a la media general.
+2 - Comparar los centros de cada cluster con respecto a la media general.
+
+No se si seria especificamente lo mismo, creo que si. con Kmeans_models[[i]]$center obtenemos un data frame con las medias no-normalizadas.
+
+Una idea interesante seria utilizar un heatmap con cada escala y despues combinarlos. Otra opcion es lo que hace Jesse y normalizar.
+
+TODO: Si añadimos los valores a las casillas del heatmap puede entenderse más facilmente en combinación con los colores
+
+# Domain Analysis
+
+
