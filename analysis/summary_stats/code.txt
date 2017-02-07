@@ -1,0 +1,4 @@
+These files have ben generated using thpsych R library:
+
+library(psych)
+describe(females_x781)

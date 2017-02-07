@@ -1,3 +1,7 @@
+#### TODO: Necesita medias normalizadas si se compara con la edad, pd_duration, etc
+#### TODO: Mostrar en el heatmap la media, en vez de los centros
+
+
 #########################################################
 ### A) Installing and loading required packages
 #########################################################
