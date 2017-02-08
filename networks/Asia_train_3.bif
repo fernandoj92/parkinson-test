@@ -1,0 +1,72 @@
+network HLCM143 {
+}
+variable variable8 {
+	type discrete[ 2 ] { state0, state1 };
+}
+variable vVisitToAsia {
+	type discrete[2] { s0, s1 };
+}
+variable vTbOrCa {
+	type discrete[2] { s0, s1 };
+}
+variable variable12 {
+	type discrete[2] { state0, state1 };
+}
+variable vBronchitis {
+	type discrete[2] { s0, s1 };
+}
+variable vDyspnea {
+	type discrete[2] { s0, s1 };
+}
+variable vSmoking {
+	type discrete[2] { s0, s1 };
+}
+variable vTuberculosis {
+	type discrete[2] { s0, s1 };
+}
+variable vXRay {
+	type discrete[2] { s0, s1 };
+}
+variable vLungCancer {
+	type discrete[2] { s0, s1 };
+}
+probability ( variable8 | variable12 ) {
+	(state0) 0.7753054914249504, 0.22469450857504955;
+	(state1) 0.25951285729488166, 0.7404871427051184;
+}
+probability ( vVisitToAsia | variable8 ) {
+	(state0) 0.969869906062383, 0.030130093937616932;
+	(state1) 0.9728981566270759, 0.0271018433729241;
+}
+probability ( vTbOrCa | variable8 ) {
+	(state0) 0.9795997482908478, 0.020400251709152148;
+	(state1) 0.9143226405382857, 0.08567735946171427;
+}
+probability ( variable12 ) {
+	table 0.6158459926977218, 0.3841540073022783;
+}
+probability ( vBronchitis | variable12 ) {
+	(state0) 0.8843929567150881, 0.11560704328491195;
+	(state1) 0.038854589061590214, 0.9611454109384099;
+}
+probability ( vDyspnea | variable12 ) {
+	(state0) 0.952926437267482, 0.047073562732518;
+	(state1) 0.12910129743204204, 0.8708987025679579;
+}
+probability ( vSmoking | variable12 ) {
+	(state0) 0.6441705098348899, 0.3558294901651101;
+	(state1) 0.42035510543956656, 0.5796448945604334;
+}
+probability ( vTuberculosis | variable12 ) {
+	(state0) 0.9843262252888849, 0.01567377471111506;
+	(state1) 0.9502346127216351, 0.04976538727836487;
+}
+probability ( vXRay | variable12 ) {
+	(state0) 0.9631697052308785, 0.03683029476912147;
+	(state1) 0.8345193266200147, 0.16548067337998534;
+}
+probability ( vLungCancer | variable12 ) {
+	(state0) 0.9843250920401816, 0.015674907959818324;
+	(state1) 0.9253507054989282, 0.07464929450107184;
+}
+

@@ -1,0 +1,62 @@
+network unknown {
+}
+variable VisitToAsia {
+  type discrete [ 2 ] { NoVisit, Visit };
+}
+variable Tuberculosis {
+  type discrete [ 2 ] { Absent, Present };
+}
+variable Smoking {
+  type discrete [ 2 ] { NonSmoker, Smoker };
+}
+variable LungCancer {
+  type discrete [ 2 ] { Absent, Present };
+}
+variable TbOrCa {
+  type discrete [ 2 ] { Nothing, CancerORTuberculosis };
+}
+variable XRay {
+  type discrete [ 2 ] { Normal, Abnormal };
+}
+variable Bronchitis {
+  type discrete [ 2 ] { Absent, Present };
+}
+variable Dyspnea {
+  type discrete [ 2 ] { Absent, Present };
+}
+
+
+probability ( Tuberculosis | VisitToAsia ) {
+  (NoVisit) 0.99, 0.01;
+  (Visit) 0.95, 0.05;
+}
+probability ( VisitToAsia ) {
+  table 0.99, 0.01;
+}
+probability ( Smoking ) {
+  table 0.5, 0.5;
+}
+probability ( LungCancer | Smoking ) {
+  (NonSmoker) 0.99, 0.01;
+  (Smoker) 0.9, 0.1;
+}
+probability ( TbOrCa | Tuberculosis, LungCancer ) {
+  (Absent, Absent) 1.0, 0.0;
+  (Present, Absent) 0.0, 1.0;
+  (Absent, Present) 0.0, 1.0;
+  (Present, Present) 0.0, 1.0;
+}
+probability ( XRay | TbOrCa ) {
+  (Nothing) 0.95, 0.05;
+  (CancerORTuberculosis) 0.02, 0.98;
+}
+probability ( Bronchitis | Smoking ) {
+  (NonSmoker) 0.7, 0.3;
+  (Smoker) 0.4, 0.6;
+}
+probability ( Dyspnea | TbOrCa, Bronchitis ) {
+  (Nothing, Absent) 0.9, 0.1;
+  (CancerORTuberculosis, Absent) 0.3, 0.7;
+  (Nothing, Present) 0.2, 0.8;
+  (CancerORTuberculosis, Present) 0.1, 0.9;
+}

@@ -1,0 +1,75 @@
+// results/Asia_train_2.bif
+// Produced by org.latlab at Wed Feb 08 16:08:45 EET 2017
+network "HLCM140" {
+}
+
+variable "variable8" {
+	type discrete[2] { "state0" "state1" };
+}
+
+variable "vVisitToAsia" {
+	type discrete[2] { "s0" "s1" };
+}
+
+variable "vTbOrCa" {
+	type discrete[2] { "s0" "s1" };
+}
+
+variable "variable12" {
+	type discrete[2] { "state0" "state1" };
+}
+
+variable "vBronchitis" {
+	type discrete[2] { "s0" "s1" };
+}
+
+variable "vDyspnea" {
+	type discrete[2] { "s0" "s1" };
+}
+
+variable "vSmoking" {
+	type discrete[2] { "s0" "s1" };
+}
+
+variable "vTuberculosis" {
+	type discrete[2] { "s0" "s1" };
+}
+
+variable "vXRay" {
+	type discrete[2] { "s0" "s1" };
+}
+
+variable "vLungCancer" {
+	type discrete[2] { "s0" "s1" };
+}
+
+probability ( "variable8" | "variable12" ) {
+	table 0.4472308410159411 0.794600686019787 0.5527691589840589 0.2053993139802131;
+}
+probability ( "vVisitToAsia" | "variable8" ) {
+	table 0.9745822409399296 0.9644823778005824 0.02541775906007044 0.035517622199417606;
+}
+probability ( "vTbOrCa" | "variable8" ) {
+	table 0.9789750261803303 0.8992814663079707 0.021024973819669616 0.1007185336920294;
+}
+probability ( "variable12"  ) {
+	table 0.383663598925954 0.6163364010740461;
+}
+probability ( "vBronchitis" | "variable12" ) {
+	table 0.03893075098402888 0.8836828501707558 0.961069249015971 0.11631714982924425;
+}
+probability ( "vDyspnea" | "variable12" ) {
+	table 0.128026199232392 0.952956790645176 0.871973800767608 0.04704320935482397;
+}
+probability ( "vSmoking" | "variable12" ) {
+	table 0.42036485532369006 0.6439890853080081 0.5796351446763099 0.35601091469199186;
+}
+probability ( "vTuberculosis" | "variable12" ) {
+	table 0.950173536282573 0.984337904432375 0.04982646371742696 0.015662095567625066;
+}
+probability ( "vXRay" | "variable12" ) {
+	table 0.8344451201320341 0.9631155745843891 0.1655548798679659 0.036884425415610864;
+}
+probability ( "vLungCancer" | "variable12" ) {
+	table 0.9252588978306713 0.98433659393869 0.07474110216932883 0.015663406061309938;
+}

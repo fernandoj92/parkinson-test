@@ -1,0 +1,83 @@
+net 
+{ 
+}
+node variable8 
+{
+  states = ( "state0" "state1" );
+}
+node vVisitToAsia 
+{
+  states = ( "s0" "s1" );
+}
+node vTbOrCa 
+{
+  states = ( "s0" "s1" );
+}
+node variable12 
+{
+  states = ( "state0" "state1" );
+}
+node vBronchitis 
+{
+  states = ( "s0" "s1" );
+}
+node vDyspnea 
+{
+  states = ( "s0" "s1" );
+}
+node vSmoking 
+{
+  states = ( "s0" "s1" );
+}
+node vTuberculosis 
+{
+  states = ( "s0" "s1" );
+}
+node vXRay 
+{
+  states = ( "s0" "s1" );
+}
+node vLungCancer 
+{
+  states = ( "s0" "s1" );
+}
+potential ( variable8 | variable12 ) 
+{
+  data = ((0.7753055 0.2246945)(0.2595129 0.7404871)) ;
+}
+potential ( vVisitToAsia | variable8 ) 
+{
+  data = ((0.96986991 0.03013009)(0.97289816 0.02710184)) ;
+}
+potential ( vTbOrCa | variable8 ) 
+{
+  data = ((0.97959975 0.02040025)(0.91432264 0.08567736)) ;
+}
+potential ( variable12 ) 
+{
+  data = ( 0.615846 0.384154 );
+}
+potential ( vBronchitis | variable12 ) 
+{
+  data = ((0.884393 0.115607)(0.03885459 0.96114541)) ;
+}
+potential ( vDyspnea | variable12 ) 
+{
+  data = ((0.95292644 0.04707356)(0.1291013 0.8708987)) ;
+}
+potential ( vSmoking | variable12 ) 
+{
+  data = ((0.6441705 0.3558295)(0.4203551 0.5796449)) ;
+}
+potential ( vTuberculosis | variable12 ) 
+{
+  data = ((0.98432623 0.01567377)(0.95023461 0.04976539)) ;
+}
+potential ( vXRay | variable12 ) 
+{
+  data = ((0.96316971 0.03683029)(0.8345193 0.1654807)) ;
+}
+potential ( vLungCancer | variable12 ) 
+{
+  data = ((0.98432509 0.01567491)(0.92535071 0.07464929)) ;
+}
